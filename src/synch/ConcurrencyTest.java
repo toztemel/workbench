@@ -1,4 +1,4 @@
-package actors;
+package synch;
 
 import static org.junit.Assert.*;
 
