@@ -1,4 +1,4 @@
-.idea/
-out/
-tdd/
+.idea
 workbench.iml
+out
+.classpath

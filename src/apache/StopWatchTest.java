@@ -1,7 +1,5 @@
 package apache;
 
-import static org.junit.Assert.*;
-
 import org.apache.commons.lang.time.StopWatch;
 import org.junit.Test;
 

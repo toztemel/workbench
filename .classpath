@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 7 [1.7.0_51]"/>
-	<classpathentry kind="lib" path="/space/release/external/spymemcached/2.7/lib/spymemcached-2.7.jar"/>
-	<classpathentry kind="lib" path="/space/release/external/apache/jakarta/commons/lang/2.5/lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="output" path="out/production/workbench"/>
-</classpath>

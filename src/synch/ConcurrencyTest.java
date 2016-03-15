@@ -66,7 +66,7 @@ public class ConcurrencyTest {
 		}
 		System.out.println("Completed tasks:" + watch.getTime());
 		
-		assertNotEquals(Integer.MAX_VALUE / 100, asyncCounter.count);
+		assertEquals(Integer.MAX_VALUE / 100, asyncCounter.count);
 		assertEquals(Integer.MAX_VALUE / 100, syncCounter.scount);
 	}
 
