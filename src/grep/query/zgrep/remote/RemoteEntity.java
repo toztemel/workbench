@@ -1,6 +1,5 @@
 package grep.query.zgrep.remote;
 
-
 public class RemoteEntity {
 	private String searchDirectory;
 	private RemoteEntityConnectionInfo connectionInfo;

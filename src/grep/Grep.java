@@ -1,4 +1,5 @@
-package grep;/*
+package grep;
+/*
  * @(#)grep.Grep.java	1.3 01/12/13
  * Search a list of files for lines that match a given regular-expression
  * pattern.  Demonstrates NIO mapped byte buffers, charsets, and regular

@@ -1,7 +1,5 @@
 package grep.query.zgrep.remote;
 
-import static org.junit.Assert.fail;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +126,7 @@ public class ZGrepRemoteSearchEngine implements SearchEngine {
 			String command = "zgrep -e \"-001463807644:11df416:13bacbd402b:-7735\" /space/SMSC*.zip";
 //			String username = searchTarget.getConnectionInfo().getUser();
 //			String password = searchTarget.getConnectionInfo().getPassword();
-//			String command = grep.query.getCommand();
+//			String command = query.getCommand();
 			try {
 				client.rexec(username, password, command);
 			} catch (Exception e) {
