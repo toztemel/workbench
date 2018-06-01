@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Arrays;
 
 public class ArrayMath {
+
 	public static double weightedMean(List<Integer> values, List<Integer> weights) {
 		
 		if (illegal(values, weights))
