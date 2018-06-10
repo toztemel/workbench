@@ -1,4 +1,4 @@
-package ctci.chapterone;
+package ctci.arrays;
 
 import org.junit.Test;
 

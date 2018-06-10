@@ -1,4 +1,4 @@
-package ctci.chapterone;
+package ctci.arrays;
 
 class UniqueCharChecker {
 
