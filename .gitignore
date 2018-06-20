@@ -2,3 +2,7 @@
 workbench.iml
 out
 .classpath
+target/
+*.iml
+lib/
+lib-*/
