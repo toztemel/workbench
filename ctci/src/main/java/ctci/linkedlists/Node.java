@@ -5,6 +5,10 @@ class Node {
     Node next = null;
     int data;
 
+    Node(int d) {
+        data = d;
+    }
+
     static Node createList(int... datas) {
         Node head = new Node(datas[0]);
         for (int i = 1; i < datas.length; i++) {
@@ -13,26 +17,26 @@ class Node {
         return head;
     }
 
-    static boolean equals (Node m, Node n) {
-        while(m.next != null && n.next!=null) {
-            if (m.data == n.data) {
-                m = m.next;
-                n = n.next;
-            } else {
+    static boolean equals(Node m, Node n) {
+        while (m != null && n != null) {
+            if (m.data != n.data) {
                 return false;
             }
+            m = m.next;
+            n = n.next;
         }
-        if (m.next != null ) {
-            return false;
-        }
-        if (n.next != null) {
-            return false;
-        }
-        return true;
+        return m == null && n == null;
     }
 
-    Node(int d) {
-        data = d;
+    static Node from(int sum) {
+        Node result = new Node(-1);
+        int rem;
+        while(sum != 0) {
+            rem = sum%10;
+            sum = sum/10;
+            result.appendToTail(new Node(rem));
+        }
+        return result.next;
     }
 
     int getData() {
@@ -41,7 +45,7 @@ class Node {
 
     Node appendToTail(Node n) {
         Node c = this;
-        while(c.next != null) {
+        while (c.next != null) {
             c = c.next;
         }
         c.next = n;
@@ -56,7 +60,7 @@ class Node {
             return n.next;
         }
 
-        while(n.next != null) {
+        while (n.next != null) {
             if (n.next.data == d) {
                 n.next = n.next.next;
                 return head;
@@ -78,4 +82,16 @@ class Node {
         return sb.toString();
     }
 
+    int toInt() {
+        int result = 0;
+        int powerOfTen = 0;
+
+        Node n = this;
+        while (n != null) {
+            result += n.data * (Math.pow(10, powerOfTen));
+            powerOfTen++;
+            n = n.next;
+        }
+        return result;
+    }
 }

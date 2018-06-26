@@ -16,13 +16,14 @@ class Finder {
     Node findLastKthValue(Node head, int k) {
         Node last = head;
         Node kth = head;
-        int i = 0;
-        while (last != null) {
+        int i = 1;
+        while (last != null && i <= k) {
             last = last.next;
             i++;
-            if (i >= k) {
-                kth = kth.next;
-            }
+        }
+        while (last != null) {
+            last = last.next;
+            kth = kth.next;
         }
         return kth;
     }
