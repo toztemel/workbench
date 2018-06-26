@@ -6,18 +6,12 @@
 
     <parent>
         <groupId>toztemel</groupId>
-        <artifactId>workbench</artifactId>
+        <artifactId>jax-rs</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>jax-rs</artifactId>
+    <artifactId>dropwizard</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
-    <modules>
-        <module>javalin</module>
-        <module>dropwizard</module>
-    </modules>
-
+    
 </project>
-
