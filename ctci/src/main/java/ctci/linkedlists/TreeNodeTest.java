@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class NodeTest {
+public class TreeNodeTest {
     @Test
     public void equals() throws Exception {
 
