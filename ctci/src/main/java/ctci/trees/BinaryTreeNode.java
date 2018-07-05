@@ -1,6 +1,6 @@
 package ctci.trees;
 
-class BinaryTreeNode {
+class BinaryTreeNode extends TreeNode {
 
     final int data;
     BinaryTreeNode left;

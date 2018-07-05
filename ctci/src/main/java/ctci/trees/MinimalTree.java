@@ -42,13 +42,6 @@ public class MinimalTree {
          * 4. Recurse
          */
 
-        class TreeNode{
-            public TreeNode right;
-            public TreeNode left;
-
-            public TreeNode(int i) { }
-        }
-
         TreeNode createMinimalBST(int array[]) {
             return createMinimalBST(array, 0, array.length-1);
         }

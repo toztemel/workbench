@@ -100,17 +100,9 @@ class ListOfDepths {
             createLevelLinkedList(root.right, lists, level+1);
         }
 
-        class TreeNode {
-            public TreeNode right;
-            public TreeNode left;
-        }
     }
 
     private static class SolutionBreadtFirstSearch {
-        private class TreeNode {
-            TreeNode left;
-            TreeNode right;
-        }
 
         ArrayList<LinkedList<TreeNode>> createLevelLinkedList(TreeNode root) {
             ArrayList result = new ArrayList();
