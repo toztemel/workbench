@@ -40,29 +40,20 @@ class BinaryTreeNode {
 
     }
 
-    void addChild(BinaryTreeNode child) {
-        if (isSmaller(child)) {
-            if (isLeftAvailable()) {
-                left.addChild(child);
-            } else {
-                left = child;
-            }
-        } else if (isGreater(child)) {
-            if (isRightAvailable()) {
-                right.addChild(child);
-            } else {
-                right = child;
-            }
-        } else {
-            // ignore equality
-        }
+    void addLeft(BinaryTreeNode l) {
+        left = l;
     }
 
-    private boolean isSmaller(BinaryTreeNode child) {
+    void addRight(BinaryTreeNode r) {
+        right = r;
+
+    }
+
+    boolean isSmaller(BinaryTreeNode child) {
         return child.data < data;
     }
 
-    private boolean isGreater(BinaryTreeNode child) {
+    boolean isGreater(BinaryTreeNode child) {
         return child.data > data;
     }
 

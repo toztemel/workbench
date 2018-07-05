@@ -28,7 +28,7 @@ public class ListOfDepthsTest {
     @Test
     public void depth_of_two_nodes() throws Exception {
         BinaryTreeNode node = new BinaryTreeNode(10);
-        node.addChild(new BinaryTreeNode(9));
+        node.addLeft(new BinaryTreeNode(9));
         List<List<BinaryTreeNode>> lists = listOfDepths.listOfDepths(node);
 
         assertEquals(2, lists.size());
@@ -37,8 +37,8 @@ public class ListOfDepthsTest {
     @Test
     public void depth_of_three_nodes() throws Exception {
         BinaryTreeNode node = new BinaryTreeNode(10);
-        node.addChild(new BinaryTreeNode(9));
-        node.addChild(new BinaryTreeNode(11));
+        node.addLeft(new BinaryTreeNode(9));
+        node.addRight(new BinaryTreeNode(11));
         List<List<BinaryTreeNode>> lists = listOfDepths.listOfDepths(node);
 
         assertEquals(2, lists.size());
@@ -47,9 +47,9 @@ public class ListOfDepthsTest {
     @Test
     public void depth_of_four_nodes() throws Exception {
         BinaryTreeNode node = new BinaryTreeNode(10);
-        node.addChild(new BinaryTreeNode(9));
-        node.addChild(new BinaryTreeNode(11));
-        node.addChild(new BinaryTreeNode(12));
+        node.addLeft(new BinaryTreeNode(9));
+        node.addRight(new BinaryTreeNode(11));
+        node.right.addRight(new BinaryTreeNode(12));
         List<List<BinaryTreeNode>> lists = listOfDepths.listOfDepths(node);
 
         assertEquals(3, lists.size());
@@ -58,10 +58,10 @@ public class ListOfDepthsTest {
     @Test
     public void depth_of_five_nodes() throws Exception {
         BinaryTreeNode node = new BinaryTreeNode(10);
-        node.addChild(new BinaryTreeNode(8));
-        node.addChild(new BinaryTreeNode(9));
-        node.addChild(new BinaryTreeNode(11));
-        node.addChild(new BinaryTreeNode(12));
+        node.addLeft(new BinaryTreeNode(8));
+        node.left.addLeft(new BinaryTreeNode(9));
+        node.addRight(new BinaryTreeNode(11));
+        node.right.addRight(new BinaryTreeNode(12));
         List<List<BinaryTreeNode>> lists = listOfDepths.listOfDepths(node);
 
         assertEquals(3, lists.size());
@@ -70,12 +70,12 @@ public class ListOfDepthsTest {
     @Test
     public void depth_of_seven_nodes() throws Exception {
         BinaryTreeNode node = new BinaryTreeNode(10);
-        node.addChild(new BinaryTreeNode(2));
-        node.addChild(new BinaryTreeNode(1));
-        node.addChild(new BinaryTreeNode(3));
-        node.addChild(new BinaryTreeNode(12));
-        node.addChild(new BinaryTreeNode(11));
-        node.addChild(new BinaryTreeNode(13));
+        node.addLeft(new BinaryTreeNode(2));
+        node.left.addLeft(new BinaryTreeNode(1));
+        node.left.addRight(new BinaryTreeNode(3));
+        node.addRight(new BinaryTreeNode(12));
+        node.right.addLeft(new BinaryTreeNode(11));
+        node.right.addRight(new BinaryTreeNode(13));
         List<List<BinaryTreeNode>> lists = listOfDepths.listOfDepths(node);
 
         assertEquals(3, lists.size());
@@ -84,13 +84,13 @@ public class ListOfDepthsTest {
     @Test
     public void depth_of_eight_nodes() throws Exception {
         BinaryTreeNode node = new BinaryTreeNode(10);
-        node.addChild(new BinaryTreeNode(2));
-        node.addChild(new BinaryTreeNode(1));
-        node.addChild(new BinaryTreeNode(3));
-        node.addChild(new BinaryTreeNode(12));
-        node.addChild(new BinaryTreeNode(11));
-        node.addChild(new BinaryTreeNode(13));
-        node.addChild(new BinaryTreeNode(15));
+        node.addLeft(new BinaryTreeNode(2));
+        node.left.addLeft(new BinaryTreeNode(1));
+        node.left.addRight(new BinaryTreeNode(3));
+        node.addRight(new BinaryTreeNode(12));
+        node.right.addLeft(new BinaryTreeNode(11));
+        node.right.addRight(new BinaryTreeNode(13));
+        node.right.right.addLeft(new BinaryTreeNode(15));
 
         List<List<BinaryTreeNode>> lists = listOfDepths.listOfDepths(node);
 

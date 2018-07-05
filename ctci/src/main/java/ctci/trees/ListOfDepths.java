@@ -4,17 +4,23 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Question: given a binary tree, create a linked list of all nodes at each depth
+ * <p>
+ * . appears at first : level-by-level traversal
+ * . both ways can be applied provided that current depth is known
+ */
 class ListOfDepths {
 
     ArrayList listOfDepths(BinaryTreeNode binaryTree) {
 
-        Queue<NodeToList> queue = new LinkedList<>();
-        DepthList list = new DepthList();
-        queue.add(new NodeToList(list, binaryTree));
+        Queue<NodeListPair> queue = new LinkedList<>();
+        ListOfNodes list = new ListOfNodes();
+        queue.add(new NodeListPair(list, binaryTree));
 
         traverse(queue, list);
 
-        ArrayList<DepthList> result = new ArrayList<>();
+        ArrayList<ListOfNodes> result = new ArrayList<>();
         while (list != null) {
             result.add(list);
             list = list.next;
@@ -22,29 +28,29 @@ class ListOfDepths {
         return result;
     }
 
-    private void traverse(Queue<NodeToList> queue, DepthList list) {
+    private void traverse(Queue<NodeListPair> queue, ListOfNodes list) {
         while (!queue.isEmpty()) {
-            NodeToList poll = queue.poll();
-            DepthList levelList = poll.list;
+            NodeListPair poll = queue.poll();
+            ListOfNodes levelList = poll.list;
             BinaryTreeNode node = poll.node;
             list.add(node);
 
-            DepthList childList;
+            ListOfNodes childList;
             if (levelList.next == null) {
-                childList = new DepthList();
+                childList = new ListOfNodes();
             } else {
                 childList = levelList.next;
             }
 
 
             if (node.left != null) {
-                queue.add(new NodeToList(childList, node.left));
+                queue.add(new NodeListPair(childList, node.left));
                 if (levelList.next == null) {
                     levelList.next = childList;
                 }
             }
             if (node.right != null) {
-                queue.add(new NodeToList(childList, node.right));
+                queue.add(new NodeListPair(childList, node.right));
                 if (levelList.next == null) {
                     levelList.next = childList;
                 }
@@ -52,17 +58,82 @@ class ListOfDepths {
         }
     }
 
-    class NodeToList {
+    private static class NodeListPair {
         BinaryTreeNode node;
-        DepthList list;
+        ListOfNodes list;
 
-        NodeToList(DepthList l, BinaryTreeNode n) {
+        NodeListPair(ListOfNodes l, BinaryTreeNode n) {
             list = l;
             node = n;
         }
     }
 
-    class DepthList extends ArrayList<BinaryTreeNode> {
-        DepthList next;
+    private static class ListOfNodes extends ArrayList<BinaryTreeNode> {
+        ListOfNodes next;
     }
+
+    /**
+     * . Both run O(N) time
+     * . BFS is more space efficient
+     * . DFS uses extra O(logN) recursive calls
+     * . both are equally efficient
+     */
+    private static class SolutionDepthFirstSearch {
+        ArrayList<LinkedList<TreeNode>> createLevelLinkedList(TreeNode root) {
+            ArrayList<LinkedList<TreeNode>> lists = new ArrayList<>();
+            createLevelLinkedList(root, lists, 0);
+            return lists;
+        }
+        private void createLevelLinkedList(TreeNode root, ArrayList<LinkedList<TreeNode>> lists, int level) {
+            if (root == null) {
+                return;
+            }
+            LinkedList<TreeNode> list = null;
+            if (lists.size() == level) { // level not contained in the list
+                list = new LinkedList<>();
+                lists.add(list);
+            } else {
+                list = lists.get(level);
+            }
+            list.add(root);
+            createLevelLinkedList(root.left, lists, level+1);
+            createLevelLinkedList(root.right, lists, level+1);
+        }
+
+        class TreeNode {
+            public TreeNode right;
+            public TreeNode left;
+        }
+    }
+
+    private static class SolutionBreadtFirstSearch {
+        private class TreeNode {
+            TreeNode left;
+            TreeNode right;
+        }
+
+        ArrayList<LinkedList<TreeNode>> createLevelLinkedList(TreeNode root) {
+            ArrayList result = new ArrayList();
+            LinkedList<TreeNode> current = new LinkedList<>();
+            if (root != null) {
+                current.add(root);
+            }
+            while (current.size() > 0) {
+                result.add(current); // add previous level
+                LinkedList<TreeNode> parents = current;// go to next level
+                current = new LinkedList<>();
+                for (TreeNode parent : parents) {
+                    if (parent.left!=null) {
+                        current.add(parent.left);
+                    }
+                    if (parent.right!=null) {
+                        current.add(parent.right);
+                    }
+                }
+            }
+            return result;
+        }
+    }
+
+
 }
