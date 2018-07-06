@@ -37,4 +37,27 @@ public class BSTSequences {
 
     private class Result extends ArrayList<BinarySearchTreeNode> {
     }
+
+
+    /**
+     * a BST was created by traversing through an array from left to right
+     * given a binary search tree, print all possible arrays that could have led to this tree
+     */
+
+    /**
+     * first element must be root
+     */
+
+    private static class Solution1 {
+
+    }
+
+    private static class Solution2 {
+
+    }
+
+    private static class Solution3 {
+
+    }
+
 }

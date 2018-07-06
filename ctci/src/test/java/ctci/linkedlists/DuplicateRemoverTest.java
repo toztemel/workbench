@@ -38,6 +38,8 @@ public class DuplicateRemoverTest {
         n = Node.createList(new int[] {1, 2, 1, 2, 3});
         remover.deleteDuplicatesWithoutBuffer(n);
         assertEquals("1-2-3", n.printList());
+
     }
+
 
 }

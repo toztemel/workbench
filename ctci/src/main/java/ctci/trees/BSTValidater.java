@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Q: check if a binary tree is a BST
+ */
 class BSTValidater {
 
     boolean isBST(BinaryTreeNode node) {
@@ -16,7 +19,7 @@ class BSTValidater {
             return true;
         }
 
-        if (!validator.isInRange(node.data)){
+        if (!validator.isInRange(node.data)) {
             return false;
         }
 
@@ -65,14 +68,112 @@ class BSTValidater {
         void addGreater(int data) {
             greater.add(data);
         }
+
         void addSmaller(int data) {
             smaller.add(data);
         }
+
         void removeGreater(int data) {
             greater.remove(data);
         }
+
         void removeSmaller(int data) {
             smaller.remove(data);
+        }
+    }
+
+
+    /**
+     * . in-order traversal
+     * . copy elements to an array
+     * . check if the array is sorted
+     * . requires a little bit of extra memory
+     * . can't handle duplicate values
+     * .    . it cannot differenciate 20(child) -> 20(parent) vs 20(parent) -> 20(child)
+     * . works if duplicate values are not allowed
+     */
+    private static class Solution1 {
+        int index = 0; // keep track of logical end of the array
+
+        boolean checkBST(TreeNode root, int size) {
+            int[] array = new int[size];
+            copyBST(root, array);
+            for (int i = 1; i < array.length; i++) {
+                if (array[i] <= array[i - 1]) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void copyBST(TreeNode root, int[] array) {
+            if (root == null) {
+                return;
+            }
+
+            copyBST(root.left, array);
+            array[index] = root.data;
+            index++;
+            copyBST(root.right, array);
+        }
+    }
+
+
+    /**
+     * . array is not necessary
+     * . eliminate array
+     * . just track the last element and compare
+     */
+    private static class Solution2 {
+
+        Integer last_printed = null;
+
+        boolean checkBST(TreeNode root) {
+            if (root == null) {
+                return true;
+            }
+
+            // check / recurse left
+            if (!checkBST(root.left))
+                return false;
+
+            // check current
+            if (last_printed != null && root.data <= last_printed) {
+                return false;
+            }
+            last_printed = root.data;
+            //check / recurse right
+            if (!checkBST(root.right)) {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    /**
+     * . left subtree <= current < right subtree
+     * . pass down min and max values
+     * . O( N ) time complexity
+     * . O( logN ) space complexity on a balanced tree
+     */
+    private static class Solution3 {
+
+        boolean checkBST(TreeNode root) {
+            return checkBST(root, null, null);
+        }
+
+        private boolean checkBST(TreeNode root, Integer min, Integer max) {
+            if (root == null) {
+                return true;
+            }
+            if ((min != null && root.data <= min) || (max != null && root.data > max)) {
+                return false;
+            }
+
+            if (!checkBST(root.left, min, root.data) || !checkBST(root.right, root.data, max)) {
+                return false;
+            }
+            return true;
         }
     }
 }
