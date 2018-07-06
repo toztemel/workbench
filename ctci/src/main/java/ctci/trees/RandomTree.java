@@ -2,6 +2,13 @@ package ctci.trees;
 
 import java.util.Random;
 
+/**
+ * a BST with methods
+ * insert
+ * find
+ * delete
+ * getRandomNode -> returns random node from tree. all nodes are equally random
+ */
 class RandomTree {
 
     private static int totalCount;
@@ -22,6 +29,10 @@ class RandomTree {
 
     private static synchronized void incrementTotalCount() {
         totalCount++;
+    }
+
+    private static int generateRandomInt() {
+        return new Random().nextInt(totalCount);
     }
 
     void insert(RandomTree parent, RandomTree newNode) throws Exception {
@@ -127,10 +138,6 @@ class RandomTree {
         return getNodeByWeight(this, generateRandomInt());
     }
 
-    private static int generateRandomInt() {
-        return new Random().nextInt(totalCount);
-    }
-
     RandomTree getNodeByWeight(RandomTree root, int weight) {
         if (weight == 1) {
             return root;
@@ -142,4 +149,72 @@ class RandomTree {
         }
     }
 
+    /**
+     * Option #1 copy nodes to array, return random element. O(N) time and space
+     * Option #2 maintain an array. => node deletion cause problem o(N) time
+     * Option #3 label nodes => has similar problems with insert and delete
+     * Option #4 use depth of the tree. pick random depth, go left or right => breaks equal random chances
+     * Option #5 traverse down. at each node 1/3 stay - 1/3 go left - 1/3 go right => breaks randomness
+     * Option #6 probability of each node should be 1/N.
+     * probability of going left should be left_size * 1/N
+     * probability of going right should be right_size * 1/N
+     * each node must know the size of its left and right subtrees
+     *
+     * O(logN)
+     */
+    private static class Solution6 {
+        class TreeNode {
+            private int data;
+            private int size;
+            private TreeNode left;
+            private TreeNode right;
+
+            TreeNode(int d) {
+                data = d;
+                size = 1;
+            }
+
+            TreeNode getRandomNode() {
+                int leftSize = left == null ? 0 : left.size();
+                Random random = new Random();
+                int index = random.nextInt(size);
+                if (index < leftSize) {
+                    return left.getRandomNode();
+                } else if (index == leftSize) {
+                    return this;
+                } else {
+                    return right.getRandomNode();
+                }
+            }
+
+            void insertInOrder(int d) {
+                if (d <= data) {
+                    if (left == null) left = new TreeNode(d);
+                    else left.insertInOrder(d);
+                } else {
+                    if (right == null) right = new TreeNode(d);
+                    else right.insertInOrder(d);
+                }
+                size++;
+            }
+
+            private int size() {
+                return size;
+            }
+            TreeNode find(int d) {
+                if (d == data) return this;
+                else if (d <= data) return left != null? left.find(d):null;
+                else if (d > data) return right != null? right.find(d):null;
+                return null;
+            }
+        }
+
+    }
+
+    /**
+     * Option #7 random calls are expensive.
+     * call random generation once.
+     * subtract the remaining size from random number
+     * pass the random number to subtree
+     */
 }
